@@ -64,12 +64,28 @@ string assign()
 	return keeperFirstName;
 }
 
-void initiaze()
+void initialize()
 {
-	
+	ifstream tagfile;
+	tagfile.open("deephippo/tag.txt");
+	cout <<"here1"<<endl;
+	string line;
+	if (tagfile.is_open())
+	{
+		while ( getline (tagfile,line) )
+	    {
+	      cout << line << '\n';
+	    }
+	}
+	else
+	{
+		cout <<"here2"<<endl;
+	}
+	tagfile.close();
 }
 
 int main()
 {
+	initialize();
 	return 0;
 }
