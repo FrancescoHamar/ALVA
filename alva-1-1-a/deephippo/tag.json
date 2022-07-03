@@ -1,8 +1,1 @@
-{ 
-    "serialtag": "ALVA-1-1-A",
-    "version": 1,
-    "series": 1,
-    "status": "ALPHA",
-    "born": false,
-    "birthdate": null 
-}
+{"serialtag": "ALVA-1-1-A", "version": 1, "series": 1, "status": "ALPHA", "born": true, "birthdate": "2022-07-03 16:02:07.897082"}
