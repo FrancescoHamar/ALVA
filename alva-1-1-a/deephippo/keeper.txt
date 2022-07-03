@@ -1,0 +1,9 @@
+firstname: 
+lastname:
+birthday:
+likes{
+	
+}
+dislikes{
+	
+}
