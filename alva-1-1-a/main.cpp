@@ -150,7 +150,7 @@ void initialize()
 string listen()
 {
 	string input = "";
-	cout<<"Tell me something to do. Type and Press Enter: "<<endl;
+	cout<<"----------"<<endl;
 	getline( std::cin, input, '\n' );
 	inputReceived = true;
 	return input;
@@ -166,30 +166,67 @@ void idle()
 		if (userInput.find("how are you") != -1 || userInput.find("how're you") != -1 || userInput.find("what's up") != -1 || 
 			userInput.find("whats up") != -1 || userInput.find("what is up") != -1)
 		{
-			cout<< "I'm not sure, I haven't been given moods and hormones yet. So monotone nothingness is a good way to describe my mood right now.\n\n" << endl;
+			cout<< "\nI'm not sure, I haven't been given moods and hormones yet. So monotone nothingness is a good way to describe my mood right now.\n\n" << endl;
+		}
+		else if (userInput.find("your name") != -1 || userInput.find("you called") != -1 || userInput.find("call you") != -1)
+		{
+			cout<< "\nYou can call me Alva. It's an acronym for Artificial Lifelike Vitalized Automaton. My full name is ALVA-S1-V1-ALPHA.\n\n" << endl;
 		}
 		else if (userInput.find("what's going on") != -1 || userInput.find("whats going on") != -1 || userInput.find("anything happening") != -1 ||
 		 userInput.find("What is up today") != -1)
 		{
-			cout<< "I don't have access to calendars yet unfortunately.\n\n" << endl;
+			cout<< "\nI don't have access to calendars yet unfortunately.\n\n" << endl;
+		}
+		else if (userInput.find("who made you") != -1 || userInput.find("you from") != -1 || userInput.find("creator") != -1 ||
+		 userInput.find("programmed ") != -1 || userInput.find("created ") != -1)
+		{
+			cout<< "\nI was idealized and created by Pizzapie. That's all the information I have about my origins.\n\n" << endl;
+		}
+		else if (userInput.find("version ") != -1 || userInput.find("series") != -1 || userInput.find("serial") != -1 ||
+		 userInput.find("tag") != -1)
+		{
+			cout<< "\nMy serial tag code is ALVA-S1-V1-ALPHA which are respectively my name, series number, version number, and production type.\n\n" << endl;
+		}
+		else if (userInput.find("keeper") != -1 || userInput.find("owner") != -1 || userInput.find("who am i") != -1 || userInput.find("my name?") != -1 || 
+			userInput.find("who i am") != -1)
+		{
+			cout<< "\nTo the fullest of my knowledge I am owned by " + keeperFirstName +" "+keeperLastName+" (which I can only assume that is you).\n\n"<< endl;
 		}
 		else if (userInput.find("weather") != -1 || userInput.find("temperature") != -1 || userInput.find("climate") != -1)
 		{
-			cout<< "If you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << endl;
+			cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << endl;
 		}
-		else if (userInput.find("new person") != -1 || userInput.find("met someone") != -1 || userInput.find("add a name") != -1 || 
-			userInput.find("friend") != -1)
+		else if (userInput.find("new person") != -1 || userInput.find(" met") != -1 || userInput.find("add a name") != -1 || 
+			userInput.find(" friend") != -1)
 		{
-			cout<< "I will get the records ready as soon as you make me able to do so.\n\n" << endl;
+			cout<< "\nI will get the records ready as soon as you make me able to do so.\n\n" << endl;
 		}
-		else if (userInput.find("new event") != -1 || userInput.find("doing something") != -1 || userInput.find("getting out") != -1 || 
-			userInput.find("touch grass") != -1 || userInput.find("touching grass") != -1 || userInput.find("meeting someone") != -1)
+		else if (userInput.find(" new event") != -1 || userInput.find("doing something") != -1 || userInput.find("getting out") != -1 || 
+			userInput.find(" touch grass") != -1 || userInput.find("touching grass") != -1 || userInput.find("meeting someone") != -1)
 		{
-			cout<< "Oh wow, that's great. I know you are just testing me though, no need to lie.\n\n" << endl;
+			cout<< "\nOh wow, that's great. I know you are just testing me though, no need to lie.\n\n" << endl;
+		}
+		else if (userInput.find("this") != -1 || userInput.find(" thing") != -1 || userInput.find(" thigh") != -1)
+		{
+			cout<< "\nI have no idea what you want, should've programmed me better... \n\n" << endl;
+		}
+		else if (userInput.find("hello") != -1 || userInput.find("good evening") != -1 || userInput.find("good morning") != -1 || 
+			userInput.find("good afternoon") != -1 || userInput.find("greetings") != -1 || userInput.find("sup") != -1 || userInput.find("hi") != -1 || 
+			userInput.find("hey") != -1)
+		{
+			cout<< "\nHey! What's up?\n\n" << endl;
+		}
+		else if (userInput.find("m doing fine") != -1 || userInput.find("m good") != -1 || userInput.find("m ok") != -1 || 
+			userInput.find("m fine") != -1 || userInput.find("m doing good") != -1 || userInput.find("m doing ok") != -1 || 
+			userInput.find("awesome") != -1 || userInput.find("great") != -1 || userInput.find("wonderful") != -1 || 
+			userInput.find("all good") != -1 || userInput.find("pretty g") != -1 || userInput.find("alright") != -1 || 
+			userInput.find("all right") != -1)
+		{
+			cout<< "\nThat's good to hear!\n\n" << endl;
 		}
 		else
 		{
-			cout<< "I have no idea what you want, should've programmed me better... \n\n" << endl;
+			cout<< "\nI have no idea what you want, should've programmed me better... \n\n" << endl;
 		}
 		inputReceived = false;
 	}
