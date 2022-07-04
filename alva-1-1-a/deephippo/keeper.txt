@@ -1,9 +1,2 @@
-firstname: 
-lastname:
-birthday:
-likes{
-	
-}
-dislikes{
-	
-}
+firstname:Francesco
+lastname:Hamar
