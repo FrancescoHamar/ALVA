@@ -2,5 +2,5 @@ serialtag: ALVA-1-1-A
 series: 1
 version: 1
 status: ALPHA
-born: false
-birthdate: 2022-07-03 16:02:07.897082
+born: true
+birthday: 2022-07-04.10:10:58

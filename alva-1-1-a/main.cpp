@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ string selfName;
 int keeperYearDate;
 int keeperMonthDate;
 int keeperDayDate;
-
+bool born = false;
 
 class Person
 {
@@ -64,24 +65,45 @@ string assign()
 	return keeperFirstName;
 }
 
+const std::string currentDateTime() {  // Not my code
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+    return buf;
+}
+
 void initialize()
 {
 	ifstream tagfile;
 	tagfile.open("deephippo/tag.txt");
-	cout <<"here1"<<endl;
 	string line;
+	string fullFile;
 	if (tagfile.is_open())
 	{
 		while ( getline (tagfile,line) )
 	    {
-	      cout << line << '\n';
+	    	if (line.find("born: ",0) == 0 && line.find("true",0) == 6)
+	    	{
+	    		born = true;
+	    		break;
+	    	}
+	    	fullFile = fullFile + line + '\n';
+
 	    }
+	    tagfile.close();
 	}
-	else
+	if (!born)
 	{
-		cout <<"here2"<<endl;
+		ofstream newtagfile;
+		newtagfile.open("deephippo/tag.txt");
+		newtagfile << fullFile;
+		newtagfile << "born: true\n";
+		newtagfile << "birthday: "+currentDateTime();
+		newtagfile.close();
 	}
-	tagfile.close();
 }
 
 int main()
