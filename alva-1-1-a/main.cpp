@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 
 using namespace std;
 
@@ -85,6 +84,10 @@ void initialize()
 	{
 		while ( getline (tagfile,line) )
 	    {
+	    	if (line.find("serial",0) == 0)
+	    	{
+	    		cout<<"Model: "+line.substr(11,10)+"\n\n"<<endl;
+	    	}
 	    	if (line.find("born: ",0) == 0 && line.find("true",0) == 6)
 	    	{
 	    		born = true;
@@ -108,6 +111,7 @@ void initialize()
 
 int main()
 {
+	cout<<"Starting Up..."<<endl;
 	initialize();
 	return 0;
 }
