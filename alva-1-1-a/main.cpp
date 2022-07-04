@@ -96,7 +96,7 @@ void initialize()
 	    {
 	    	if (line.find("serial",0) == 0)
 	    	{
-	    		cout<<"Model: "+line.substr(10,16)+"\n\n"<<endl;
+	    		cout<<"Model: "+parseData(line)+"\n\n"<<endl;
 	    	}
 	    	if (line.find("born:",0) == 0 && line.find("true",0) == 5)
 	    	{
@@ -188,7 +188,7 @@ void idle()
 			cout<< "\nMy serial tag code is ALVA-S1-V1-ALPHA which are respectively my name, series number, version number, and production type.\n\n" << endl;
 		}
 		else if (userInput.find("keeper") != -1 || userInput.find("owner") != -1 || userInput.find("who am i") != -1 || userInput.find("my name?") != -1 || 
-			userInput.find("who i am") != -1)
+			userInput.find("who i am") != -1 || userInput.find("you owned by") != -1 || userInput.find("owns you") != -1)
 		{
 			cout<< "\nTo the fullest of my knowledge I am owned by " + keeperFirstName +" "+keeperLastName+" (which I can only assume that is you).\n\n"<< endl;
 		}
@@ -224,9 +224,13 @@ void idle()
 		{
 			cout<< "\nThat's good to hear!\n\n" << endl;
 		}
+		else if (userInput == "thank you" || userInput == "thanks")
+		{
+			cout<< "\nYou are welcome!\n\n" << endl;
+		}
 		else
 		{
-			cout<< "\nI have no idea what you want, should've programmed me better... \n\n" << endl;
+			cout<< "\nI'm sorry, I don't know what you mean. Unfortunately I was programmed by an incompetent person, or perhaps you misspelled something.\n\n" << endl;
 		}
 		inputReceived = false;
 	}
@@ -234,7 +238,7 @@ void idle()
 
 int main()
 {
-	cout<<"Starting Up..."<<endl;
+	cout<<"Starting Up...\n"<<endl;
 	initialize();
 	while (true)
 	{
