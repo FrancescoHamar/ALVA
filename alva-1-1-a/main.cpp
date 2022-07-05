@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -16,28 +17,32 @@ bool inputReceived = false;
 
 class Person
 {
-public:
-	string status;
-	bool alive;
-	string knownName;
-	string firstName;
-	string lastName;
-	string middleName;
-	int age;
-	int birthday;
-	string like[5];
-	string dislike[5];
+	public:
+		string status;
+		bool alive;
+		string knownName;
+		string firstName;
+		string lastName;
+		string middleName;
+		int age;
+		int birthday;
+		string like[5];
+		string dislike[5];
 };
-
-string greeting(bool formal)
-{
-	return "";
-}
 
 string parseData(string givenLine)
 {
 	int col = givenLine.find(":");
 	return givenLine.substr(col+1,-1);
+}
+
+string listen()
+{
+	string input = "";
+	getline( std::cin, input, '\n' );
+	inputReceived = true;
+	transform(input.begin(), input.end(), input.begin(), ::tolower);
+	return input;
 }
 
 string assign()
@@ -81,6 +86,21 @@ const std::string currentDateTime() {  // Not my code!!
     strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
 
     return buf;
+}
+
+int binaryChoice(string theirAnswer)
+{
+	if (theirAnswer.find("yes") != -1 || theirAnswer.find("yea") != -1 || theirAnswer.find("yep") != -1 || theirAnswer.find("sure") != -1 || 
+		theirAnswer.find("ok") != -1)
+	{
+		return 1;
+	}
+	else if (theirAnswer.find("no") != -1 || theirAnswer.find("nah") != -1 || theirAnswer.find("dont") != -1 || theirAnswer.find("don't") != -1)
+	{
+		return 0;
+	}
+	cout<< "\nPlease answer with a clear yes or no answer.\n\n" << endl;
+	return binaryChoice(listen());
 }
 
 void initialize()
@@ -147,21 +167,95 @@ void initialize()
 	}
 }
 
-string listen()
+void addPerson()
 {
-	string input = "";
-	cout<<"----------"<<endl;
-	getline( std::cin, input, '\n' );
-	inputReceived = true;
-	return input;
+	bool missingFirst = false;
+	bool missingLast = false;
+	cout<< "\nPlease tell me their firstname.\n\n" << endl;
+	string tempFirst = listen();
+	if (tempFirst.find("don't") != -1 || tempFirst.find("dont") != -1 || tempFirst.find("no idea") != -1)
+	{
+		missingFirst = true;
+		tempFirst = "";
+	}
+	cout<< "\nPlease tell me their lastname\n\n" << endl;
+	string tempLast = listen();
+	if (tempLast.find("don't") != -1 || tempLast.find("dont") != -1 || tempLast.find("no idea") != -1)
+	{
+		missingLast = true;
+		tempLast = "";
+	}
+	if (missingLast && missingFirst)
+	{
+		cout<< "\n\nSorry, I can't log people without their name.\n\n" << endl;
+	}
+	else
+	{
+		cout<< "\nChecking if person already in logs..." << endl;
+		ifstream masterfile;
+		masterfile.open("frontalcortex/people/master.txt");
+		string line;
+		string lastLine = ":0";
+		string fullFile;
+		bool noRecord = true;
+
+		if (masterfile.is_open())
+		{
+			cout<< "\nOpening Master file" << endl;
+			while (getline (masterfile,line))
+		    {
+		    	if (line.find(tempFirst+" "+tempLast,0) == 0)
+		    	{
+		    		cout<< "\nA record of "+tempFirst+ " "+tempLast+" already exists.\n\n" << endl;
+		    		noRecord = false;
+		    	}
+		    	fullFile = fullFile + line + '\n';
+		    	lastLine = line;
+
+		    }
+		    masterfile.close();
+		}
+		if (noRecord)
+		{
+			cout<< "\nAdding Person ..\n\n" << endl;
+			int lastNum = stoi(parseData(lastLine))+1;
+			ofstream newMasterFile;
+			newMasterFile.open("frontalcortex/people/master.txt");
+			newMasterFile << fullFile;
+			newMasterFile << tempFirst+" "+ tempLast+":"+to_string(lastNum)+"\n";
+			newMasterFile.close();
+		}
+	}
 }
+
+
+void peopleHub()
+{
+	cout<< "\nDo you want to add this person to your contacts?\n\n" << endl;
+	string answer = listen();
+	if (binaryChoice(answer) == 1)
+	{
+		addPerson();
+	}
+	else
+	{
+		cout<< "\nDo you want to know something about them?\n\n" << endl;
+		answer = listen();
+		if (binaryChoice(answer) == 1)
+		{
+			// retrievePerson()
+		}
+	}
+
+}
+
 
 void idle()
 {
+	cout<<"----------\n"<<endl;
 	userInput = listen();  // To be timed out after while 
 	if (inputReceived)
 	{
-		transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
 
 		if (userInput.find("how are you") != -1 || userInput.find("how're you") != -1 || userInput.find("what's up") != -1 || 
 			userInput.find("whats up") != -1 || userInput.find("what is up") != -1)
@@ -173,7 +267,7 @@ void idle()
 			cout<< "\nYou can call me Alva. It's an acronym for Artificial Lifelike Vitalized Automaton. My full name is ALVA-S1-V1-ALPHA.\n\n" << endl;
 		}
 		else if (userInput.find("what's going on") != -1 || userInput.find("whats going on") != -1 || userInput.find("anything happening") != -1 ||
-		 userInput.find("What is up today") != -1)
+		 userInput.find("What is up today") != -1 || userInput.find(" today") != -1)
 		{
 			cout<< "\nI don't have access to calendars yet unfortunately.\n\n" << endl;
 		}
@@ -197,9 +291,12 @@ void idle()
 			cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << endl;
 		}
 		else if (userInput.find("new person") != -1 || userInput.find(" met") != -1 || userInput.find("add a name") != -1 || 
-			userInput.find(" friend") != -1)
+			userInput.find("another person") != -1 || userInput.find("add a person") != -1 || userInput.find("new people") != -1 || 
+			userInput.find("add people") != -1 || userInput.find("add a contact") != -1 || userInput.find("new contact") != -1)
 		{
-			cout<< "\nI will get the records ready as soon as you make me able to do so.\n\n" << endl;
+			cout<< "\nAccessing Records....\n" << endl;
+			peopleHub();
+
 		}
 		else if (userInput.find(" new event") != -1 || userInput.find("doing something") != -1 || userInput.find("getting out") != -1 || 
 			userInput.find(" touch grass") != -1 || userInput.find("touching grass") != -1 || userInput.find("meeting someone") != -1)
@@ -214,7 +311,7 @@ void idle()
 			userInput.find("good afternoon") != -1 || userInput.find("greetings") != -1 || userInput.find("sup") != -1 || userInput.find("hi") != -1 || 
 			userInput.find("hey") != -1)
 		{
-			cout<< "\nHey! What's up?\n\n" << endl;
+			cout<< "\n\nHey! What's up?\n\n" << endl;
 		}
 		else if (userInput.find("m doing fine") != -1 || userInput.find("m good") != -1 || userInput.find("m ok") != -1 || 
 			userInput.find("m fine") != -1 || userInput.find("m doing good") != -1 || userInput.find("m doing ok") != -1 || 
