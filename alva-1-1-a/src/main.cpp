@@ -18,14 +18,14 @@ void addPerson()
 	bool missingFirst = false;
 	bool missingLast = false;
 	std::cout<< "\nPlease tell me their firstname.\n\n" << std::endl;
-	std::string tempFirst = listen();
+	std::string tempFirst = capitalize(listen());
 	if (tempFirst.find("don't") != -1 || tempFirst.find("dont") != -1 || tempFirst.find("no idea") != -1)
 	{
 		missingFirst = true;
 		tempFirst = "";
 	}
 	std::cout<< "\nPlease tell me their lastname\n\n" << std::endl;
-	std::string tempLast = listen();
+	std::string tempLast = capitalize(listen());
 	if (tempLast.find("don't") != -1 || tempLast.find("dont") != -1 || tempLast.find("no idea") != -1)
 	{
 		missingLast = true;
@@ -112,14 +112,14 @@ void retrievePerson()
 	bool missingFirst = false;
 	bool missingLast = false;
 	std::cout<< "\nWhat is their firstname.\n\n" << std::endl;
-	std::string tempFirst = listen();
+	std::string tempFirst = capitalize(listen());
 	if (tempFirst.find("don't") != -1 || tempFirst.find("dont") != -1 || tempFirst.find("no idea") != -1)
 	{
 		missingFirst = true;
 		tempFirst = "";
 	}
 	std::cout<< "\nPlease tell me their lastname\n\n" << std::endl;
-	std::string tempLast = listen();
+	std::string tempLast = capitalize(listen());
 	if (tempLast.find("don't") != -1 || tempLast.find("dont") != -1 || tempLast.find("no idea") != -1)
 	{
 		missingLast = true;

@@ -45,3 +45,10 @@ bool binaryChoice(std::string theirAnswer)
 	std::cout<< "\nPlease answer with a clear yes or no answer.\n\n" << std::endl;
 	return binaryChoice(listen());
 }
+
+std::string capitalize(std::string word)
+{
+	word.front() = toupper(word[0]);
+	return word;
+}
+

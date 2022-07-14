@@ -27,10 +27,10 @@ std::string assign()
   	std::cout << "Hello!\nI'm Alva (Serial Tag: ALVA-S1-V1-ALPHA)\n"<<std::endl;
   	std::cout << "What's your firstname?\n"<<std::endl;
   	std::cin >> firstName;
-  	keepfile << "firstname:" << firstName << "\n";
+  	keepfile << "firstname:" << capitalize(firstName) << "\n";
   	std::cout << "What's your lastname?\n"<<std::endl;
   	std::cin >> lastName;
-  	keepfile << "lastname:" << lastName << "\n";
+  	keepfile << "lastname:" << capitalize(lastName) << "\n";
   	/*
   	std::cout << "What year were you born in?\n"<<std::endl;
   	std::cin >> lastName;
