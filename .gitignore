@@ -1,5 +1,4 @@
-# Default ignored files
-/shelf/
-/workspace.xml
 .DS_Store
-.idea
+.idea/
+.gitignore
+*.exe
