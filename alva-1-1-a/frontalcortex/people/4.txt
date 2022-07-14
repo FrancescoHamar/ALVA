@@ -1,0 +1,5 @@
+firstname:balazs
+lastname:hamar
+birthyear:1968
+birthmonth:october
+birthday:4

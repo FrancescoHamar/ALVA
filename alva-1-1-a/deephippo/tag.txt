@@ -1,6 +1,2 @@
-serialtag:ALVA-S1-V1-ALPHA
-series:1
-version:1
-status:ALPHA
 born:true
-birthday:2022-07-04.10:10:58
+birthday:2022-07-14.11:29:36
