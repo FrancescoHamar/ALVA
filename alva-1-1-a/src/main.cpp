@@ -2,168 +2,19 @@
 #include <fstream>
 
 std::string listen();
+std::string parseDataPost(std::string givenLine);
+std::string parseDataPrev(std::string givenLine);
+std::string initialize();
+const std::string currentDateTime();
+bool binaryChoice(std::string theirAnswer);
 
-std::string keeperFirstName;
-std::string keeperLastName;
-std::string selfName;
 std::string userInput;
 int keeperYearDate;
 int keeperMonthDate;
 int keeperDayDate;
-bool born = false;
-bool assigned = false;
+std::string keeperFirstName;
+std::string keeperLastName;
 
-class Person
-{
-	public:
-		std::string status;
-		bool alive;
-		std::string knownName;
-		std::string firstName;
-		std::string lastName;
-		std::string middleName;
-		int age;
-		int birthday;
-		std::string like[5];
-		std::string dislike[5];
-};
-
-std::string listen()
-{
-	std::string input = "";
-	getline( std::cin, input, '\n' );
-	transform(input.begin(), input.end(), input.begin(), ::tolower);
-	return input;
-}
-
-std::string parseDataPrev(std::string givenLine)
-{
-	int col = givenLine.find(":");
-	return givenLine.substr(col+1,-1);
-}
-
-std::string assign()
-{
-	std::ofstream keepfile;
-  	keepfile.open ("../deephippo/keeper.txt");
-  	std::cout << "Hello!\nI'm Alva (Serial Tag: ALVA-S1-V1-ALPHA)\n"<<std::endl;
-  	std::cout << "What's your firstname?\n"<<std::endl;
-  	std::cin >> keeperFirstName;
-  	keepfile << "firstname:" << keeperFirstName << "\n";
-  	std::cout << "What's your lastname?\n"<<std::endl;
-  	std::cin >> keeperLastName;
-  	keepfile << "lastname:" << keeperLastName << "\n";
-  	/*
-  	std::cout << "What year were you born in?\n"<<std::endl;
-  	std::cin >> keeperLastName;
-  	keepfile << "firstname:" << keeperYearDate<<keeperMonthDate<<keeperDayDate<< "/n";
-  	*/
-
-  	keepfile.close();
-	return keeperFirstName;
-}
-
-void greet(bool newUser)
-{
-	if (newUser)
-	{
-		std::cout << "Hello " << keeperFirstName << "!\n\n" << std::endl;   // Potential use of different words
-	}
-	else
-	{
-		std::cout << "Nice to meet you "<< keeperFirstName << "!" << std::endl; 
-	}
-}
-
-const std::string currentDateTime() {  // Not my code!!
-    time_t     now = time(0);
-    struct tm  tstruct;
-    char       buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
-
-    return buf;
-}
-
-bool binaryChoice(std::string theirAnswer)
-{
-	if (theirAnswer.find("yes") != -1 || theirAnswer.find("yea") != -1 || theirAnswer.find("yep") != -1 || theirAnswer.find("sure") != -1 || 
-		theirAnswer.find("ok") != -1)
-	{
-		return true;
-	}
-	else if (theirAnswer.find("no") != -1 || theirAnswer.find("nah") != -1 || theirAnswer.find("dont") != -1 || theirAnswer.find("don't") != -1)
-	{
-		return false;
-	}
-	std::cout<< "\nPlease answer with a clear yes or no answer.\n\n" << std::endl;
-	return binaryChoice(listen());
-}
-
-
-void initialize()
-{
-	std::ifstream tagfile;
-	tagfile.open("deephippo/tag.txt");
-	std::string line;
-	std::string fullFile;
-
-	if (tagfile.is_open())
-	{
-		while (getline (tagfile,line))
-	    {
-	    	if (line.find("serial",0) == 0)
-	    	{
-	    		std::cout<<"Model: "+parseDataPrev(line)+"\n\n"<<std::endl;
-	    	}
-	    	if (line.find("born:",0) == 0 && line.find("true",0) == 5)
-	    	{
-	    		born = true;
-	    		break;
-	    	}
-	    	fullFile = fullFile + line + '\n';
-
-	    }
-	    tagfile.close();
-	}
-
-	if (!born)
-	{
-		std::ofstream newtagfile;
-		newtagfile.open("../deephippo/tag.txt");
-		newtagfile << fullFile;
-		newtagfile << "born:true\n";
-		newtagfile << "birthday:"+currentDateTime();
-		newtagfile.close();
-	}
-
-	std::ifstream keeperfile;
-	keeperfile.open("../deephippo/keeper.txt");
-
-	if (keeperfile.is_open())
-	{
-		while(getline(keeperfile, line))
-		{
-			if (line.find("firstname:",0) == 0)
-	    	{
-	    		assigned = true;
-	    		keeperFirstName = parseDataPrev(line);
-	    	}
-	    	if (line.find("lastname:",0) == 0 && assigned)
-	    	{
-	    		keeperLastName = parseDataPrev(line);
-	    		greet(true);
-	    	}
-		}
-	}
-	keeperfile.close();
-
-	if (!assigned)
-	{
-		assign();
-		greet(false);
-	}
-}
 
 void addPerson()
 {
@@ -217,7 +68,7 @@ void addPerson()
 		{
 			std::cout<< "\nAdding Person ..\n\n" << std::endl;
 
-			int lastNum = stoi(parseDataPrev(lastLine))+1;
+			int lastNum = stoi(parseDataPost(lastLine))+1;
 
 			std::ofstream newMasterFile;
 			newMasterFile.open("frontalcortex/people/master.txt");
@@ -299,7 +150,7 @@ void retrievePerson()
 		    	{
 		    		std::cout<< "\nRecord of "+tempFirst+ " "+tempLast+" found.\n\n" << std::endl;
 		    		recordExists = true;
-		    		personCode = parseDataPrev(line);
+		    		personCode = parseDataPost(line);
 		    	}
 
 		    }
@@ -433,7 +284,9 @@ void idle()
 int main()
 {
 	std::cout<<"Starting Up...\n"<<std::endl;
-	initialize();
+	std::string keeperName = initialize();
+	keeperFirstName = parseDataPrev(keeperName);
+	keeperLastName = parseDataPost(keeperName);
 	while (true)
 	{
 		idle();
