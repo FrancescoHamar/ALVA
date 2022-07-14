@@ -48,7 +48,7 @@ std::string assign()
 std::string initialize()
 {
 	std::ifstream tagfile;
-	tagfile.open("deephippo/tag.txt");
+	tagfile.open("../deephippo/tag.txt");
 	std::string line;
 	std::string fullFile;
 
