@@ -1,12 +1,9 @@
 #include <iostream>
 #include <fstream>
 
-std::string listen();
-std::string parseDataPost(std::string givenLine);
-std::string parseDataPrev(std::string givenLine);
+#include "util.h"
+
 std::string initialize();
-const std::string currentDateTime();
-bool binaryChoice(std::string theirAnswer);
 
 std::string userInput;
 int keeperYearDate;
@@ -42,7 +39,7 @@ void addPerson()
 	{
 		std::cout<< "\nChecking if person already in logs..." << std::endl;
 		std::ifstream masterfile;
-		masterfile.open("frontalcortex/people/master.txt");
+		masterfile.open("../frontalcortex/people/master.txt");
 		std::string line;
 		std::string lastLine = ":0";
 		std::string fullFile;
@@ -71,13 +68,13 @@ void addPerson()
 			int lastNum = stoi(parseDataPost(lastLine))+1;
 
 			std::ofstream newMasterFile;
-			newMasterFile.open("frontalcortex/people/master.txt");
+			newMasterFile.open("../frontalcortex/people/master.txt");
 			newMasterFile << fullFile;
 			newMasterFile << tempFirst+" "+ tempLast+":"+std::to_string(lastNum)+"\n";
 			newMasterFile.close();
 
 			std::ofstream newPersonFile;
-			newPersonFile.open("frontalcortex/people/"+std::to_string(lastNum)+".txt");
+			newPersonFile.open("../frontalcortex/people/"+std::to_string(lastNum)+".txt");
 			newPersonFile << "firstname:"+tempFirst+"\n";
 			newPersonFile << "lastname:"+tempLast+"\n";
 

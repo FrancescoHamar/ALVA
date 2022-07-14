@@ -1,10 +1,6 @@
 #include <iostream>
 #include <fstream>
-
-std::string listen();
-std::string parseDataPost(std::string givenLine);
-const std::string currentDateTime();
-bool binaryChoice(std::string theirAnswer);
+#include "util.h"
 
 std::string firstName;
 std::string lastName;
