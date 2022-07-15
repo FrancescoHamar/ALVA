@@ -5,7 +5,7 @@
 #include "objPerson.h"
 #include "init.h"
 
-void Alva::greet(bool newUser)
+void Self::greet(bool newUser)
 {
 	if (newUser)
 	{
@@ -17,8 +17,10 @@ void Alva::greet(bool newUser)
 	}
 }
 
-void Alva::initializeAlva()
+void Self::initializeAlva()
 {
+	std::cout<<"Starting Up...\n"<<std::endl;
+	
 	std::ifstream tagfile;
 	tagfile.open(m_tagURL);
 	std::string line;
@@ -73,7 +75,7 @@ void Alva::initializeAlva()
 	}
 }
 
-void Alva::initializeKeeper()
+void Self::initializeKeeper()
 {
 	std::string line;
 	std::ifstream keeperfile;

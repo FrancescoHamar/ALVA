@@ -2,7 +2,7 @@
 
 #include "init.h"
 
-extern Alva alvaSelf;
+extern Self self;
 
 std::string listen();
 std::string parseDataPost(std::string givenLine);

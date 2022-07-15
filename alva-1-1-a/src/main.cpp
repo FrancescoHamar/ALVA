@@ -7,11 +7,10 @@
 #include "inputAnal.h"
 
 
+Self self;
+
 int main()
 {
-	std::cout<<"Starting Up...\n"<<std::endl;
-
-	Alva alvaSelf;
 
 	while (true)
 	{

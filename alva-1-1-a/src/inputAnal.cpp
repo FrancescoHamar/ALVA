@@ -61,7 +61,7 @@ void basicIdle()
 		else if (userInput.find("keeper") != -1 || userInput.find("owner") != -1 || userInput.find("who am i") != -1 || userInput.find("my name?") != -1 || 
 			userInput.find("who i am") != -1 || userInput.find("you owned by") != -1 || userInput.find("owns you") != -1)
 		{
-			// std::cout<< "\nTo the fullest of my knowledge I am owned by " + alvaSelf.firstName +" "+ alvaSelf.lastName +" (which I can only assume that is you).\n\n"<< std::endl;
+			std::cout<< "\nTo the fullest of my knowledge I am owned by " + capitalize(self.firstName) +" "+ capitalize(self.lastName) +" (which I can only assume that is you).\n\n"<< std::endl;
 		}
 		else if (userInput.find("weather") != -1 || userInput.find("temperature") != -1 || userInput.find("climate") != -1)
 		{

@@ -1,6 +1,6 @@
 #pragma once
 
-class Alva
+class Self
 {
 public:
 	std::string serialtag;
@@ -28,7 +28,7 @@ public:
 	void initializeAlva();
 	void initializeKeeper();
 
-	Alva()
+	Self()
 		: serialtag(""), firstName(""), lastName(""), m_series(""), m_version(""), m_status(""), m_born(false), m_alvaBirthday(""), m_assigned(false), 
 		m_birthYear(""), m_birthMonth(""), m_birthDate(""), m_tagURL("../deephippo/tag.txt"), m_keeperURL("../deephippo/keeper.txt")
 	{
