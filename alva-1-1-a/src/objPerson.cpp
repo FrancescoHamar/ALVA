@@ -12,17 +12,6 @@ void Person::cleanBuffers()
 	m_recordExists = false;
 }
 
-std::string Person::askAttribute(std::string attribute)
-{
-	std::cout<< "\nPlease tell me "+attribute+".\n\n" << std::endl;
-	attribute = listen();
-	if (attribute.find("don't") != -1 || attribute.find("dont") != -1 || attribute.find("no idea") != -1)
-	{
-		attribute = "";
-	}
-	return attribute;
-}
-
 std::string Person::checkForRecord(bool newFile)
 {
 	std::string code;

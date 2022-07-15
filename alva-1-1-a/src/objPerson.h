@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 class Person
 {
 public:
@@ -21,8 +19,8 @@ private:
 	std::string m_fullFile;
 	std::string m_personCode;
 
-	std::string m_peopleURL;
-	std::string m_masterURL;
+	const std::string m_peopleURL;
+	const std::string m_masterURL;
 
 public:
 	void addPerson();
@@ -30,26 +28,13 @@ public:
 	void pullRecord();
 
 	Person()
+		: firstName(""), lastName(""), birthYear(""), birthMonth(""), 
+		birthDay(""), relation(""), sports(""), music(""), behavior(""), 
+		notes(""), m_line(""), m_lastLine(""), m_fullFile(""), m_personCode(""), 
+		m_peopleURL("../frontalcortex/people/"), m_masterURL("../frontalcortex/people/master.txt")
 	{
-		firstName = "";
-		lastName = "";
-		birthYear = "";
-		birthMonth = "";
-		birthDay = "";
-		relation = "";
-		sports = "";
-		music = "";
-		behavior = "";
-		notes = "";
-		m_line = "";
-		m_lastLine = "";
-		m_fullFile = "";
-		m_personCode = "";
-		m_peopleURL = "../frontalcortex/people/";
-		m_masterURL = "../frontalcortex/people/master.txt";
 	}
 
 private:
-	std::string askAttribute(std::string attribute);
 	void cleanBuffers();
 };

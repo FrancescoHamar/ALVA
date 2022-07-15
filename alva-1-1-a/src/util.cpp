@@ -22,9 +22,9 @@ std::string parseDataPrev(std::string givenLine)
 }
 
 const std::string currentDateTime() {  // Not my code!!
-    time_t     now = time(0);
-    struct tm  tstruct;
-    char       buf[80];
+    time_t now = time(0);
+    struct tm tstruct;
+    char buf[80];
     tstruct = *localtime(&now);
     strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
 
@@ -50,5 +50,16 @@ std::string capitalize(std::string word)
 {
 	word.front() = toupper(word[0]);
 	return word;
+}
+
+std::string askAttribute(std::string attribute)
+{
+	std::cout<< "\nPlease tell me "+attribute+".\n\n" << std::endl;
+	attribute = listen();
+	if (attribute.find("don't") != -1 || attribute.find("dont") != -1 || attribute.find("no idea") != -1)
+	{
+		attribute = "";
+	}
+	return attribute;
 }
 
