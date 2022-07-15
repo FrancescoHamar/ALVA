@@ -2,6 +2,7 @@
 #include <fstream>
 
 #include "util.h"
+#include "objPerson.h"
 
 std::string initialize();
 
@@ -13,175 +14,13 @@ std::string keeperFirstName;
 std::string keeperLastName;
 
 
-void addPerson()
-{
-	bool missingFirst = false;
-	bool missingLast = false;
-	std::cout<< "\nPlease tell me their firstname.\n\n" << std::endl;
-	std::string tempFirst = capitalize(listen());
-	if (tempFirst.find("don't") != -1 || tempFirst.find("dont") != -1 || tempFirst.find("no idea") != -1)
-	{
-		missingFirst = true;
-		tempFirst = "";
-	}
-	std::cout<< "\nPlease tell me their lastname\n\n" << std::endl;
-	std::string tempLast = capitalize(listen());
-	if (tempLast.find("don't") != -1 || tempLast.find("dont") != -1 || tempLast.find("no idea") != -1)
-	{
-		missingLast = true;
-		tempLast = "";
-	}
-	if (missingLast && missingFirst)
-	{
-		std::cout<< "\n\nSorry, I can't log people without their name.\n\n" << std::endl;
-	}
-	else
-	{
-		std::cout<< "\nChecking if person already in logs..." << std::endl;
-		std::ifstream masterfile;
-		masterfile.open("../frontalcortex/people/master.txt");
-		std::string line;
-		std::string lastLine = ":0";
-		std::string fullFile;
-		bool noRecord = true;
-
-		if (masterfile.is_open())
-		{
-			std::cout<< "\nOpening Master file" << std::endl;
-			while (getline (masterfile,line))
-		    {
-		    	if (line.find(tempFirst+" "+tempLast,0) == 0)
-		    	{
-		    		std::cout<< "\nA record of "+tempFirst+ " "+tempLast+" already exists.\n\n" << std::endl;
-		    		noRecord = false;
-		    	}
-		    	fullFile = fullFile + line + '\n';
-		    	lastLine = line;
-
-		    }
-		    masterfile.close();
-		}
-		if (noRecord)
-		{
-			std::cout<< "\nAdding Person ..\n\n" << std::endl;
-
-			int lastNum = stoi(parseDataPost(lastLine))+1;
-
-			std::ofstream newMasterFile;
-			newMasterFile.open("../frontalcortex/people/master.txt");
-			newMasterFile << fullFile;
-			newMasterFile << tempFirst+" "+ tempLast+":"+std::to_string(lastNum)+"\n";
-			newMasterFile.close();
-
-			std::ofstream newPersonFile;
-			newPersonFile.open("../frontalcortex/people/"+std::to_string(lastNum)+".txt");
-			newPersonFile << "firstname:"+tempFirst+"\n";
-			newPersonFile << "lastname:"+tempLast+"\n";
-
-			std::cout<< "What year where they born in?\n\n" << std::endl;
-			std::string tempYear = listen();
-			if (tempYear.find("don't") != -1 || tempYear.find("dont") != -1 || tempYear.find("no idea") != -1)
-			{
-				tempFirst = "";
-			}
-			newPersonFile << "birthyear:"+tempYear+"\n";
-
-			std::cout<< "What month where they born in?\n\n" << std::endl;
-			std::string tempMonth = listen();
-			if (tempMonth.find("don't") != -1 || tempMonth.find("dont") != -1 || tempMonth.find("no idea") != -1)
-			{
-				tempMonth = "";
-			}
-			newPersonFile << "birthmonth:"+tempMonth+"\n";
-
-			std::cout<< "What day where they born on?\n\n" << std::endl;
-			std::string tempDay = listen();
-			if (tempDay.find("don't") != -1 || tempDay.find("dont") != -1 || tempDay.find("no idea") != -1)
-			{
-				tempDay = "";
-			}
-			newPersonFile << "birthday:"+tempDay+"\n";
-
-			newPersonFile.close();
-		}
-	}
-}
-
-void retrievePerson()
-{
-	bool missingFirst = false;
-	bool missingLast = false;
-	std::cout<< "\nWhat is their firstname.\n\n" << std::endl;
-	std::string tempFirst = capitalize(listen());
-	if (tempFirst.find("don't") != -1 || tempFirst.find("dont") != -1 || tempFirst.find("no idea") != -1)
-	{
-		missingFirst = true;
-		tempFirst = "";
-	}
-	std::cout<< "\nPlease tell me their lastname\n\n" << std::endl;
-	std::string tempLast = capitalize(listen());
-	if (tempLast.find("don't") != -1 || tempLast.find("dont") != -1 || tempLast.find("no idea") != -1)
-	{
-		missingLast = true;
-		tempLast = "";
-	}
-	if (missingLast && missingFirst)
-	{
-		std::cout<< "\n\nSorry, I can't look for people without their name.\n\n" << std::endl;
-	}
-	else
-	{
-		std::cout<< "\nFinding person's logs..." << std::endl;
-		std::ifstream masterfile;
-		masterfile.open("../frontalcortex/people/master.txt");
-		std::string line;
-		std::string personCode;
-		bool recordExists = false;
-
-		if (masterfile.is_open())
-		{
-			std::cout<< "\nOpening Master file.." << std::endl;
-			while (getline (masterfile,line))
-		    {
-		    	if (line.find(tempFirst+" "+tempLast,0) == 0)
-		    	{
-		    		std::cout<< "\nRecord of "+tempFirst+ " "+tempLast+" found.\n\n" << std::endl;
-		    		recordExists = true;
-		    		personCode = parseDataPost(line);
-		    	}
-
-		    }
-		    masterfile.close();
-		}
-		if (recordExists)
-		{
-			std::ifstream personFile;
-			personFile.open("../frontalcortex/people/"+personCode+".txt");
-
-			if (personFile.is_open())
-			{
-				while (getline (personFile,line))
-			    {
-			    	int col = line.find(":");
-			    	line = line.insert(col+1," ");
-			    	std::cout<< line+"\n";
-
-			    }
-			    personFile.close();
-			}
-			
-		}
-	}
-}
-
-
 void peopleHub()
 {
 	std::cout<< "\nDo you want to add this person to your contacts?\n\n" << std::endl;
 	std::string answer = listen();
 	if (binaryChoice(answer))
 	{
-		addPerson();
+		// addPerson();
 	}
 	else
 	{
@@ -189,7 +28,7 @@ void peopleHub()
 		answer = listen();
 		if (binaryChoice(answer))
 		{
-			retrievePerson();
+			// retrievePerson();
 		}
 	}
 

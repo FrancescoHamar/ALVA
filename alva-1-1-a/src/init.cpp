@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
+
 #include "util.h"
+#include "objPerson.h"
 
 std::string firstName;
 std::string lastName;
