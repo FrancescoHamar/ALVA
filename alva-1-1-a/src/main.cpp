@@ -16,11 +16,13 @@ std::string keeperLastName;
 
 void peopleHub()
 {
+	Person personInstance;
+
 	std::cout<< "\nDo you want to add this person to your contacts?\n\n" << std::endl;
 	std::string answer = listen();
 	if (binaryChoice(answer))
 	{
-		// addPerson();
+		personInstance.addPerson();
 	}
 	else
 	{
@@ -28,10 +30,9 @@ void peopleHub()
 		answer = listen();
 		if (binaryChoice(answer))
 		{
-			// retrievePerson();
+			personInstance.pullRecord();
 		}
 	}
-
 }
 
 
@@ -116,6 +117,7 @@ void idle()
 		}
 	}
 }
+
 
 int main()
 {

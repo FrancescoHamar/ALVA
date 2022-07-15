@@ -21,13 +21,33 @@ private:
 	std::string m_fullFile;
 	std::string m_personCode;
 
-	const std::string m_peopleURL = "../frontalcortex/people/";
-	const std::string m_masterURL = "../frontalcortex/people/master.txt";
+	std::string m_peopleURL;
+	std::string m_masterURL;
 
 public:
 	void addPerson();
-	void checkForRecord(bool newFile);
+	std::string checkForRecord(bool newFile);
 	void pullRecord();
+
+	Person()
+	{
+		firstName = "";
+		lastName = "";
+		birthYear = "";
+		birthMonth = "";
+		birthDay = "";
+		relation = "";
+		sports = "";
+		music = "";
+		behavior = "";
+		notes = "";
+		m_line = "";
+		m_lastLine = "";
+		m_fullFile = "";
+		m_personCode = "";
+		m_peopleURL = "../frontalcortex/people/";
+		m_masterURL = "../frontalcortex/people/master.txt";
+	}
 
 private:
 	std::string askAttribute(std::string attribute);

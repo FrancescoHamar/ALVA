@@ -23,50 +23,65 @@ std::string Person::askAttribute(std::string attribute)
 	return attribute;
 }
 
-void Person::checkForRecord(bool newFile)
+std::string Person::checkForRecord(bool newFile)
 {
+	std::string code;
+
 	firstName = askAttribute("their FIRST name");
 	lastName = askAttribute("their LAST name");
 
-	if (firstName == "" & lastName == "")
+	if (firstName == "" && lastName == "")
 	{
 		if (newFile)
 		{
 			std::cout<< "\n\nSorry, I can't record new people without their name.\n\n" << std::endl;
+			m_recordExists = true;
+			return "0";
 		}
 		else
 		{
-			std::cout<< "\n\nSorry, I can't look for records without their name.\n\n" << std::endl;
+			std::cout<< "\n\nSorry, I can't look for records without a name.\n\n" << std::endl;
+			m_recordExists = false;
+			return "0";
 		}
 	}
-
-	std::cout<< "\nChecking if person present in logs..." << std::endl;
-	std::ifstream masterfile;
-	masterfile.open(m_masterURL);
-
-	if (masterfile.is_open())
+	else
 	{
-		cleanBuffers();
-		std::cout<< "\nOpening Master file" << std::endl;
-		while (getline (masterfile, m_line))
-	    {
-	    	if (m_line.find(firstName+" "+lastName,0) == 0)
-	    	{
-	    		if (newFile)
-	    		{
-	    			std::cout<< "\nA record of "+capitalize(firstName)+ " "+capitalize(lastName)+" already exists.\n\n" << std::endl;
-	    		}
-	    		else
-	    		{
-	    			std::cout<< "\nThe record of "+capitalize(firstName)+ " "+capitalize(lastName)+" has been found.\n\n" << std::endl;
-	    		}
-	    		m_recordExists = true;
-	    	}
-	    	m_fullFile = m_fullFile + m_line + '\n';
-	    	m_lastLine = m_line;
+		std::cout<< "\nChecking if person present in logs..." << std::endl;
+		std::ifstream masterfile;
+		masterfile.open(m_masterURL);
 
-	    }
-	    masterfile.close();
+		if (masterfile.is_open())
+		{
+			cleanBuffers();
+			std::cout<< "\nOpening Master file" << std::endl;
+			while (getline (masterfile, m_line))
+		    {
+		    	if (m_line.find(firstName+" "+lastName,0) == 0)
+		    	{
+		    		if (newFile)
+		    		{
+		    			std::cout<< "\nA record of "+capitalize(firstName)+ " "+capitalize(lastName)+" already exists.\n\n" << std::endl;
+		    			code = parseDataPost(m_line);
+		    			m_recordExists = true;
+		    			return code;
+		    		}
+		    		else
+		    		{
+		    			std::cout<< "\nThe record of "+capitalize(firstName)+ " "+capitalize(lastName)+" has been found.\n\n" << std::endl;
+		    			code = parseDataPost(m_line);
+		    			m_recordExists = true;
+		    			return code;
+		    		}
+		    	}
+		    	m_fullFile = m_fullFile + m_line + '\n';
+		    	m_lastLine = m_line;
+
+		    }
+		    masterfile.close();
+		}
+		code = std::to_string(stoi(parseDataPost(m_lastLine))+1);
+		return code;
 	}
 }
 
@@ -74,22 +89,20 @@ void Person::checkForRecord(bool newFile)
 void Person::addPerson()
 {
 
-	checkForRecord(true);
+	m_personCode = checkForRecord(true);
 	
 	if (!m_recordExists)
 	{
 		std::cout<< "\nAdding Person ..\n\n" << std::endl;
 
-		int lastNum = stoi(parseDataPost(m_lastLine))+1;
-
 		std::ofstream masterFile;
 		masterFile.open(m_masterURL);
 		masterFile << m_fullFile;
-		masterFile << firstName+" "+ lastName+":"+std::to_string(lastNum)+"\n";
+		masterFile << firstName+" "+ lastName+":"+m_personCode+"\n";
 		masterFile.close();
 
 		std::ofstream personFile;
-		personFile.open(m_peopleURL+std::to_string(lastNum)+".txt");
+		personFile.open(m_peopleURL+m_personCode+".txt");
 		personFile << "firstname:"+firstName+"\n";
 		personFile << "lastname:"+lastName+"\n";
 
@@ -126,7 +139,7 @@ void Person::addPerson()
 void Person::pullRecord()
 {
 
-	checkForRecord(false);
+	m_personCode = checkForRecord(false);
 
 	if (m_recordExists)
 	{
@@ -142,7 +155,7 @@ void Person::pullRecord()
 		    {
 		    	std::string descrLine = parseDataPrev(m_line);
 		    	std::string dataLine = parseDataPost(m_line);
-		    	std::cout<< capitalize(descrLine)+": "+capitalize(dataLine);
+		    	std::cout<< capitalize(descrLine)+": "+capitalize(dataLine)<<std::endl;
 
 		    }
 
