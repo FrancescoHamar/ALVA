@@ -3,3 +3,8 @@ lastname:bigazzi
 birthyear:2004
 birthmonth:july
 birthday:13
+relation:second cousin
+sports:used to run track and field.
+music:plays the saxophone and possibly still plays piano. likes michael jackson.
+behavior:stay out of quarrel, but gossips. any gossip is appreciated
+notes:

@@ -1,5 +1,5 @@
-firstname:Diomede
-lastname:Fatigati
+firstname:diomede
+lastname:fatigati
 birthyear:
 birthmonth:
 birthday:
