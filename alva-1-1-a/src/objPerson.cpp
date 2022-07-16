@@ -125,10 +125,11 @@ void Person::addPerson()
 
 
 
-void Person::pullRecord()
+void Person::displayData()
 {
 
 	m_personCode = checkForRecord(false);
+	int compCounter = 0;
 
 	if (m_recordExists)
 	{
@@ -139,22 +140,188 @@ void Person::pullRecord()
 
 		if (personFile.is_open())
 		{
-			// int i = 1;
 			while (getline(personFile, m_line))
 		    {
+		    	compCounter++;
 		    	std::string descrLine = parseDataPrev(m_line);
 		    	std::string dataLine = parseDataPost(m_line);
 		    	std::cout<< capitalize(descrLine)+": "+capitalize(dataLine)<<std::endl;
-
 		    }
-
-		    // firstName = parseDataPost(personFile.getline(m_line))
-
-
 
 		    personFile.close();
 		}
-		
+		if (compCounter < 10)
+		{
+			std::cout<<"\nThis record is incomplete, would you like to complete it?\n"<<std::endl;
+			if (binaryChoice(listen()))
+			{
+				changeData();
+			}
+		}
 	}
 }
+
+void Person::loadData()
+{
+
+	if (m_recordExists)
+	{
+
+		std::ifstream personFile;
+		personFile.open(m_peopleURL+m_personCode+".txt");
+
+		if (personFile.is_open())
+		{
+			while (getline(personFile, m_line))
+		    {
+		    	if (m_line.find("firstname:") == 0)
+		    	{
+		    		firstName = parseDataPost(m_line);
+		    		std::cout<<firstName<<std::endl;
+		    	}
+		    	else if (m_line.find("lastname:") == 0)
+		    	{
+		    		lastName = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("birthyear:") == 0)
+		    	{
+		    		birthYear = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("birthmonth:") == 0)
+		    	{
+		    		birthMonth = parseDataPost(m_line);
+		    		std::cout<<birthMonth<<std::endl;
+		    	}
+		    	else if (m_line.find("birthday:") == 0)
+		    	{
+		    		birthDay = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("relation:") == 0)
+		    	{
+		    		relation = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("sports:") == 0)
+		    	{
+		    		sports = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("music:") == 0)
+		    	{
+		    		music = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("behavior:") == 0)
+		    	{
+		    		behavior = parseDataPost(m_line);
+		    	}
+		    	else if (m_line.find("notes:") == 0)
+		    	{
+		    		notes = parseDataPost(m_line);
+		    	}
+		    }
+		    personFile.close();
+		}
+	}
+}
+
+void Person::unloadData()
+{
+	std::ofstream personFile;
+	personFile.open(m_peopleURL+m_personCode+".txt");
+	
+	personFile << "firstname:"<<firstName<<"\n";
+	personFile << "lastname:"<<lastName<<"\n";
+	personFile << "birthyear:"<<birthYear<<"\n";
+	personFile << "birthmonth:"<<birthMonth<<"\n";
+	personFile << "birthday:"<<birthDay<<"\n";
+	personFile << "relation:"<<relation<<"\n";
+	personFile << "sports:"<<sports<<"\n";
+	personFile << "music:"<<music<<"\n";
+	personFile << "behavior:"<<behavior<<"\n";
+	personFile << "notes:"<<notes<<"\n";	
+    	
+	personFile.close();
+}
+
+void Person::changeData()
+{
+	std::string temp;
+	loadData();
+
+	std::cout <<"\nLeave blank to keep the data or type the new data, press enter to continue to new data value\n\n"<<std::endl;
+
+	std::cout <<"\nCurrently recorded firstname: "<<capitalize(firstName)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		firstName = temp;
+	}
+
+	std::cout <<"\nCurrently recorded lastname: "<<capitalize(lastName)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		lastName = temp;
+	}
+
+	std::cout <<"\nCurrently recorded birthyear: "<<capitalize(birthYear)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		birthYear = temp;
+	}
+
+	std::cout <<"\nCurrently recorded birthmonth: "<<capitalize(birthMonth)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		birthMonth = temp;
+	}
+
+	std::cout <<"\nCurrently recorded birthday: "<<capitalize(birthDay)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		birthDay = temp;
+	}
+
+	std::cout <<"\nCurrently recorded relation: "<<capitalize(relation)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		relation = temp;
+	}
+
+	std::cout <<"\nCurrently recorded sports: "<<capitalize(sports)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		sports = temp;
+	}
+
+	std::cout <<"\nCurrently recorded music: "<<capitalize(music)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		music = temp;
+	}
+
+	std::cout <<"\nCurrently recorded behavior: "<<capitalize(behavior)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		behavior = temp;
+	}
+
+	std::cout <<"\nCurrently recorded notes: "<<capitalize(notes)<<std::endl;
+	temp = listen();
+	if (temp != "")
+	{
+		notes = temp;
+	}
+
+	unloadData();
+
+}
+
+
+
 

@@ -3,3 +3,8 @@ lastname:hamar
 birthyear:2007
 birthmonth:april
 birthday:27
+relation:brother
+sports:soccer
+music:queens, lots of youtube-pushed songs, etc.
+behavior:
+notes:need to discuss maranello and san vincenzo with him

@@ -20,7 +20,7 @@ void peopleHub()
 		answer = listen();
 		if (binaryChoice(answer))
 		{
-			personInstance.pullRecord();
+			personInstance.displayData();
 		}
 	}
 }

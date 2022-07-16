@@ -25,7 +25,10 @@ private:
 public:
 	void addPerson();
 	std::string checkForRecord(bool newFile);
-	void pullRecord();
+	void displayData();
+	void loadData();
+	void unloadData();
+	void changeData();
 
 	Person()
 		: firstName(""), lastName(""), birthYear(""), birthMonth(""), 

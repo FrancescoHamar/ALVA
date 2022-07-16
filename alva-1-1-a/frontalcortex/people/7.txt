@@ -1,0 +1,10 @@
+firstname:gianluca
+lastname:oberreit
+birthyear:2004
+birthmonth:december
+birthday:21
+relation:close friend
+sports:rowing, possibly still swimming, used to play rugby
+music:plays the violin and piano. classical music, specifically romantic pieces. bowie and such
+behavior:inquisitive
+notes:

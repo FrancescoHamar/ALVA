@@ -7,7 +7,7 @@
 #include "inputAnal.h"
 
 
-Self self;
+Self self;  // I mean what the hell is this?? this looks so dumb, why can't it just stay in int main() if it's defined as extern right?
 
 int main()
 {
