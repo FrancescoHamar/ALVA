@@ -177,7 +177,6 @@ void Person::loadData()
 		    	if (m_line.find("firstname:") == 0)
 		    	{
 		    		firstName = parseDataPost(m_line);
-		    		std::cout<<firstName<<std::endl;
 		    	}
 		    	else if (m_line.find("lastname:") == 0)
 		    	{
@@ -190,7 +189,6 @@ void Person::loadData()
 		    	else if (m_line.find("birthmonth:") == 0)
 		    	{
 		    		birthMonth = parseDataPost(m_line);
-		    		std::cout<<birthMonth<<std::endl;
 		    	}
 		    	else if (m_line.find("birthday:") == 0)
 		    	{
@@ -243,83 +241,51 @@ void Person::unloadData()
 
 void Person::changeData()
 {
-	std::string temp;
 	loadData();
 
 	std::cout <<"\nLeave blank to keep the data or type the new data, press enter to continue to new data value\n\n"<<std::endl;
 
 	std::cout <<"\nCurrently recorded firstname: "<<capitalize(firstName)<<std::endl;
-	temp = listen();
-	if (temp != "")
-	{
-		firstName = temp;
-	}
+	std::string temp = listen();
+	firstName = temp != "" ? temp : firstName;
 
 	std::cout <<"\nCurrently recorded lastname: "<<capitalize(lastName)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		lastName = temp;
-	}
+	lastName = temp != "" ? temp : lastName;
 
 	std::cout <<"\nCurrently recorded birthyear: "<<capitalize(birthYear)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		birthYear = temp;
-	}
+	birthYear = temp != "" ? temp : birthYear;
 
 	std::cout <<"\nCurrently recorded birthmonth: "<<capitalize(birthMonth)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		birthMonth = temp;
-	}
+	birthMonth = temp != "" ? temp : birthMonth;
 
 	std::cout <<"\nCurrently recorded birthday: "<<capitalize(birthDay)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		birthDay = temp;
-	}
+	birthDay = temp != "" ? temp : birthDay;
 
 	std::cout <<"\nCurrently recorded relation: "<<capitalize(relation)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		relation = temp;
-	}
+	relation = temp != "" ? temp : relation;
 
 	std::cout <<"\nCurrently recorded sports: "<<capitalize(sports)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		sports = temp;
-	}
+	sports = temp != "" ? temp : sports;
 
 	std::cout <<"\nCurrently recorded music: "<<capitalize(music)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		music = temp;
-	}
+	music = temp != "" ? temp : music;
 
 	std::cout <<"\nCurrently recorded behavior: "<<capitalize(behavior)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		behavior = temp;
-	}
+	behavior = temp != "" ? temp : behavior;
 
 	std::cout <<"\nCurrently recorded notes: "<<capitalize(notes)<<std::endl;
 	temp = listen();
-	if (temp != "")
-	{
-		notes = temp;
-	}
+	notes = temp != "" ? temp : notes;
 
 	unloadData();
-
 }
 
 

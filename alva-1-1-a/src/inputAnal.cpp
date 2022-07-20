@@ -3,25 +3,67 @@
 #include "init.h"
 #include "util.h"
 #include "objPerson.h"
+#include "todo.h"
 
 void peopleHub()
 {
 	Person personInstance;
 
-	std::cout<< "\nDo you want to add this person to your contacts?\n\n" << std::endl;
+	std::cout<< "\nWould you like to look someone up or add a new record?\n\n" << std::endl;
 	std::string answer = listen();
-	if (binaryChoice(answer))
+	if (answer.find("add") != -1 || answer.find("create") != -1  || answer.find("new") != -1)
 	{
 		personInstance.addPerson();
 	}
+	else if (answer.find("look") != -1 || answer.find("check") != -1 || answer.find("find") != -1 || answer.find("see") != -1)
+	{
+		personInstance.displayData();
+		std::cout<< "\nWould you like to edit this record?\n\n" << std::endl;
+		if (binaryChoice(listen()))
+		{
+			personInstance.changeData();
+		}
+	}
 	else
 	{
-		std::cout<< "\nDo you want to know something about them?\n\n" << std::endl;
+		std::cout<< "\nSorry, I must have missunderstood.\n\n" << std::endl;
+	}
+}
+
+void todoHub()
+{
+	Todo todoInstance;
+
+	std::cout<< "\nWould you add or remove an item?\n\n" << std::endl;
+	std::string answer = listen();
+	if (answer.find("add") != -1 || answer.find("create") != -1  || answer.find("new") != -1)
+	{
+		std::cout<<"Would you like to add an urgent item, a common item, or a long term one?\n";
 		answer = listen();
-		if (binaryChoice(answer))
+		if (answer.find("urgent") != -1)
 		{
-			personInstance.displayData();
+			todoInstance.addItem(1);
 		}
+		else if (answer.find("common") != -1)
+		{
+			todoInstance.addItem(2);
+		}
+		else if (answer.find("long") != -1)
+		{
+			todoInstance.addItem(3);
+		}
+		else
+		{
+			std::cout<<"Sorry, I couldn't understand the type."<<std::endl;
+		}
+	}
+	else if (answer.find("remove") != -1 || answer.find("complete") != -1 || answer.find("finished") != -1 || answer.find("reached") != -1)
+	{
+		todoInstance.removeItem();
+	}
+	else
+	{
+		std::cout<< "\nOk!\n" << std::endl;
 	}
 }
 
@@ -74,6 +116,11 @@ void basicIdle()
 			std::cout<< "\nAccessing Records....\n" << std::endl;
 			peopleHub();
 
+		}
+		else if (userInput.find("todo") != -1 || userInput.find("to-do") != -1 || userInput.find("to do list") != -1)
+		{
+			std::cout<< "\nAccessing your todo list.\n\n" << std::endl;
+			todoHub();
 		}
 		else if (userInput.find(" new event") != -1 || userInput.find("doing something") != -1 || userInput.find("getting out") != -1 || 
 			userInput.find(" touch grass") != -1 || userInput.find("touching grass") != -1 || userInput.find("meeting someone") != -1)

@@ -3,7 +3,6 @@
 
 #include "init.h"
 #include "util.h"
-#include "objPerson.h"
 #include "inputAnal.h"
 
 
