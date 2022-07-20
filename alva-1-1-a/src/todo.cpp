@@ -37,42 +37,48 @@ void Todo::displayData()
 {
 	int count = 1;
 
-	std::cout<<"\nHere is your to-do list:\n"<<std::endl;
+	std::cout<<"\nHere is your to-do list:\n\n"<<std::endl;
 
 	if (urgentL.size() > 0)
 	{
-		std::cout << "Here are your urgent to-do items: \n";
+		std::cout << "Here are your urgent to-do items: \n\n";
 		for(std::string item : urgentL)
+		{
 			std::cout << count << ": " << item << "\n";
 			count++;
+		}
 	}
 	else
 	{
-		std::cout << "You don't have any urgent items.\n";
+		std::cout << "\nYou don't have any urgent items.\n";
 	}
 
 	if (commonL.size() > 0)
 	{
-		std::cout << "Here are your common to-do items: \n";
+		std::cout << "\n\nHere are your common to-do items: \n\n";
 		for(std::string item : commonL)
+		{
 			std::cout << count << ": " << item << "\n";
 			count++;
+		}
 	}
 	else
 	{
-		std::cout << "You don't have any common items.\n";
+		std::cout << "\nYou don't have any common items.\n\n";
 	}
 
-	if (commonL.size() > 0)
+	if (longtermL.size() > 0)
 	{
-		std::cout << "Here are your long term to-do items: \n";
+		std::cout << "\n\nHere are your long term to-do items: \n\n";
 		for(std::string item : longtermL)
+		{
 			std::cout << count << ": " << item << "\n";
 			count++;
+		}
 	}
 	else
 	{
-		std::cout << "You don't have any long term items.\n";
+		std::cout << "\n\nYou don't have any long term items.\n\n"<<std::endl;
 	}
 }
 
@@ -83,33 +89,28 @@ void Todo::removeItem()
 	if (answer <= urgentL.size())
 	{
 		urgentL.erase(urgentL.begin()+answer-1);
+		std::cout<<"\nItem deleted!\n\n";
 	}
-	else
-	{
-		answer = answer - urgentL.size();
-	}
-	if (answer <= commonL.size())
+	else if ((answer - urgentL.size()) <= commonL.size())
 	{
 		commonL.erase(commonL.begin()+answer-1);
+		std::cout<<"\nItem deleted!\n\n";
 	}
-	else
-	{
-		answer = answer - commonL.size();
-	}
-	if (answer <= longtermL.size())
+	else if ((answer - commonL.size()) <= longtermL.size())
 	{
 		longtermL.erase(longtermL.begin()+answer-1);
+		std::cout<<"\nItem deleted!\n\n";
 	}
 	else
 	{
-		std::cout<<"Something is wrong \n";
+		std::cout<<"\nYou input a number that seems to be out of range.\n\n";
 	}
-
+	displayData();
 }
 
 void Todo::addItem(int type)
 {
-	std::cout<<"Please type the item to add: "<< std::endl;
+	std::cout<<"\nPlease type the item to add: \n"<< std::endl;
 	std::string item = listen();
 	switch(type)
 	{
@@ -119,7 +120,6 @@ void Todo::addItem(int type)
 			break;
 		// Common
 		case 2:
-			std::cout<<"Adding common item";
 			commonL.push_back(item);
 			break;
 		// Long term
@@ -127,18 +127,13 @@ void Todo::addItem(int type)
 			longtermL.push_back(item);
 			break;
 	}
-	std::cout<<commonL[0]<< std::endl;
-	unloadData();
-	loadData();
 	displayData();
 }
 
 
 void Todo::unloadData()
 {
-	std::cout<<"Unloading"<<std::endl;
 	std::ofstream todoFile;
-	std::cout<<m_todoURL;
 	todoFile.open(m_todoURL);
 
 	for (std::string item : urgentL)
@@ -146,13 +141,9 @@ void Todo::unloadData()
 
 	for (std::string item : commonL)
 		todoFile << "common:" << item << "\n";
-	
+
 	for (std::string item : longtermL)
 		todoFile << "longterm:" << item << "\n";
 
 	todoFile.close();
 }
-
-
-
-

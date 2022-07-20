@@ -10,9 +10,9 @@ public:
 	std::string music;
 	std::string behavior;
 	std::string notes;
+	bool m_recordExists;
 
 private:
-	bool m_recordExists;
 
 	std::string m_line;
 	std::string m_lastLine;

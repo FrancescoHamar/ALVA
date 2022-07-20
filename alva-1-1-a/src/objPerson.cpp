@@ -131,6 +131,8 @@ void Person::displayData()
 	m_personCode = checkForRecord(false);
 	int compCounter = 0;
 
+	std::cout<<m_recordExists<<std::endl;
+
 	if (m_recordExists)
 	{
 		m_personCode = parseDataPost(m_line);
@@ -159,6 +161,8 @@ void Person::displayData()
 			}
 		}
 	}
+
+	std::cout<<"Record not found"<< std::endl;
 }
 
 void Person::loadData()

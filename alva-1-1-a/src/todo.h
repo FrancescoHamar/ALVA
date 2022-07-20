@@ -20,7 +20,7 @@ public:
 	void unloadData();
 
 	Todo()
-		: m_todoURL("./frontalcortex/todo/list.txt")
+		: m_todoURL("../frontalcortex/todo/list.txt")
 	{
 		loadData();
 		displayData();
