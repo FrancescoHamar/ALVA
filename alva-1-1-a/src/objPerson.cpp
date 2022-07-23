@@ -120,6 +120,9 @@ void Person::addPerson()
 		personFile << "notes:"+notes+"\n";
 
 		personFile.close();
+
+
+		std::cout<<"\nHere is the record that has been added: \n"<<std::endl;
 	}
 }
 
@@ -162,7 +165,10 @@ void Person::displayData()
 		}
 	}
 
-	std::cout<<"Record not found"<< std::endl;
+	else
+	{
+		std::cout<<"Record not found"<< std::endl;
+	}
 }
 
 void Person::loadData()
