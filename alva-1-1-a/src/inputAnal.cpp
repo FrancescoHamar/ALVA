@@ -87,7 +87,8 @@ void todoHub()
 
 void weatherHub()
 {
-	std::cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << std::endl;
+	std::cout << "Where would you like to know the weather?" << std::endl;
+	std:: string answer = listen();
 	
 }
 
@@ -131,7 +132,9 @@ void basicIdle()
 		}
 		else if (userInput.find("weather") != -1 || userInput.find("temperature") != -1 || userInput.find("climate") != -1)
 		{
-			weatherHub();
+			std::cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << std::endl;
+
+			// weatherHub();
 		}
 		else if (userInput.find("person") != -1 || userInput.find(" met") != -1 || userInput.find("add a name") != -1 || userInput.find("new people") != -1 || 
 			userInput.find("contact") != -1 || userInput.find("someone") != -1 || userInput.find("guy") != -1 || userInput.find("man") != -1 || 

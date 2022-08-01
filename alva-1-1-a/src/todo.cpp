@@ -86,19 +86,31 @@ void Todo::removeItem()
 {
 	std::cout<< "\nWhich item number would you like to remove? (please use numerals)\n" << std::endl;
 	int answer = std::stoi(listen());
+	int realint = answer-1;
+
+	std::cout<<answer<<std::endl;
+	std::cout<<realint<<std::endl;
+	std::cout<<urgentL.size()<<std::endl;
+	std::cout<<commonL.size()<<std::endl;
+	std::cout<<longtermL.size()<<std::endl;
+
 	if (answer <= urgentL.size())
 	{
-		urgentL.erase(urgentL.begin()+answer-1);
+		std::cout<<"first"<<std::endl;
+		urgentL.erase(urgentL.begin()+realint);
 		std::cout<<"\nItem deleted!\n\n";
 	}
 	else if ((answer - urgentL.size()) <= commonL.size())
 	{
-		commonL.erase(commonL.begin()+answer-1);
+		realint = realint-urgentL.size();
+		std::cout<<"second"<<std::endl;
+		commonL.erase(commonL.begin()+realint);
 		std::cout<<"\nItem deleted!\n\n";
 	}
-	else if ((answer - commonL.size()) <= longtermL.size())
+	else if (( answer - commonL.size() - urgentL.size() )<= longtermL.size())
 	{
-		longtermL.erase(longtermL.begin()+answer-1);
+		realint = realint-commonL.size()-urgentL.size();
+		longtermL.erase(longtermL.begin()+(answer-1));
 		std::cout<<"\nItem deleted!\n\n";
 	}
 	else

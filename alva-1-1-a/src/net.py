@@ -1,16 +1,22 @@
 import requests
 
+# Using openweatherapi as weather retrieve and position retrieve for lon and lat.
+# Possibly use own set of lon and lat with a relatively big amount of data on known or set locations.
+
 
 API_ID = ""
-commsURL = "../frontalcortex/comms/dir.txt"
-weatherCALL = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}"
-posCALL = f"http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}"
-connected = False
 lat = ""
 lon = ""
+city = ""
+COMMS_URL = "../frontalcortex/comms/dir.txt"
+weatherCALL = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_ID}"
+posCALL = f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state_code},{country_code}&limit={limit}&appid={API_ID}"
+connected = False
 
 
-def loadScope():
+def load_scope():
+    global commsFile
+
     commsFile = file.open(commsURL, 'r')
     
     if file.read == "weather":
@@ -21,12 +27,13 @@ def loadScope():
         return False
 
 
-def retrieveWeather():
+def retrieve_weather():
+    global commsFile
     r = requests.get(weatherCALL)
 
     # Format r
     print(r)
-    commsFile = file.open(commsURL, 'w')
+    commsFile = file.open(COMMS_URL, 'w')
     
     if connected:
         commsFile.write("description:"+description)
@@ -38,8 +45,8 @@ def retrieveWeather():
         commsFile.close()
 
 
-
-def retrievePos():
+def retrieve_pos():
+    global lat, lon
     r = requests.get(posCALL)
 
     # Format r
@@ -48,12 +55,10 @@ def retrievePos():
     lon = ""
 
 
-
-
-scope = loadScope()
+scope = load_scope()
 
 if scope == 'w':
-    retrieveWeather()
+    retrieve_weather()
 else:
     commsFile = file.open(commsURL, 'w')
     commsFile.write("failed")

@@ -1,2 +1,3 @@
-urgent:need to fix the whole todo.cpp logic probably
-common:go buy groceries for tonight
+urgent:set appointment for registration at delft
+common:keep testing todo lisst
+longterm:finish project
