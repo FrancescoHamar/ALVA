@@ -4,6 +4,7 @@
 #include "util.h"
 #include "objPerson.h"
 #include "todo.h"
+#include "comms.h"
 
 void peopleHub()
 {
@@ -88,8 +89,9 @@ void todoHub()
 void weatherHub()
 {
 	std::cout << "Where would you like to know the weather?" << std::endl;
-	std:: string answer = listen();
-	
+	std::string location = listen();
+
+	sendRequest(1, location);
 }
 
 
@@ -134,7 +136,9 @@ void basicIdle()
 		{
 			std::cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << std::endl;
 
-			// weatherHub();
+			weatherHub();
+
+			std::cout<<"complete\n";
 		}
 		else if (userInput.find("person") != -1 || userInput.find(" met") != -1 || userInput.find("add a name") != -1 || userInput.find("new people") != -1 || 
 			userInput.find("contact") != -1 || userInput.find("someone") != -1 || userInput.find("guy") != -1 || userInput.find("man") != -1 || 
