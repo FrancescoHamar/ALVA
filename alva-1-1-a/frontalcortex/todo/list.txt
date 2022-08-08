@@ -1,3 +1,3 @@
-urgent:set appointment for registration at delft
-common:keep testing todo lisst
+common:work on formatting weather output
+common:establish communication between net.py and comms.cpp
 longterm:finish project

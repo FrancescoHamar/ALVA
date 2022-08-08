@@ -297,7 +297,3 @@ void Person::changeData()
 
 	unloadData();
 }
-
-
-
-

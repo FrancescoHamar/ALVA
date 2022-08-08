@@ -28,10 +28,25 @@ void sendRequest(int indicator, std::string param)
 	commsFile.close();
 }
 
+void initNET()
+{
+	// Could be more complex in the future (It will definitely initiate an exe)
+	
+	system("python3 net.py");
+}
 
-void readRespose()
+std::string getResponse()
 {
 	std::ifstream resFile;
-	resFile.open(resURL)
-	
+	std::string response;
+	std::string line;
+	resFile.open(resURL);
+	if (resFile.is_open())
+	{
+		while (getline(resFile, line))
+		{
+			response = line+response;
+		}
+	}
+	return response;
 }

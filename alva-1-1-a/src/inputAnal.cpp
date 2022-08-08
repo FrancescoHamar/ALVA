@@ -92,6 +92,7 @@ void weatherHub()
 	std::string location = listen();
 
 	sendRequest(1, location);
+	initNET();
 }
 
 
