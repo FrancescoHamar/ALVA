@@ -78,7 +78,8 @@ def retrieve_weather():
 
         try:
             print("Just a moment..\n\n")
-            r = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_ID}")
+            r = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_ID}"
+                             f"&units=metric")
 
             data = r.json()
             main = ((data["weather"])[0])["main"]

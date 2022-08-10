@@ -109,7 +109,7 @@ void basicIdle()
 		{
 			std::cout<< "\nI'm not sure, I haven't been given moods and hormones yet. So monotone nothingness is a good way to describe my mood right now.\n\n" << std::endl;
 		}
-		else if (userInput.find("your name") != -1 || userInput.find("you called") != -1 || userInput.find("call you") != -1)
+		else if (userInput.find("your name") != -1 || userInput.find("you called") != -1 || userInput.find("call you") != -1 || userInput.find("who are you") != -1 || userInput.find("what are you") != -1)
 		{
 			std::cout<< "\nYou can call me Alva. It's an acronym for Artificial Lifelike Vitalized Automaton. My full name is ALVA-S1-V1-ALPHA.\n\n" << std::endl;
 		}
@@ -138,8 +138,6 @@ void basicIdle()
 			std::cout<< "\nIf you look outside you might be able to tell. I belive it is approximately between 260K and 305K. \nFurthermore I stop working above 373K and below about 240K if you want a more accurate but less precise answer\n\n" << std::endl;
 
 			weatherHub();
-
-			std::cout<<"complete\n";
 		}
 		else if (userInput.find("person") != -1 || userInput.find(" met") != -1 || userInput.find("add a name") != -1 || userInput.find("new people") != -1 || 
 			userInput.find("contact") != -1 || userInput.find("someone") != -1 || userInput.find("guy") != -1 || userInput.find("man") != -1 || 
