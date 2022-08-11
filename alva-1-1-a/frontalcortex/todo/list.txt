@@ -1,3 +1,0 @@
-common:work on formatting weather output
-common:check a level results
-longterm:finish project
