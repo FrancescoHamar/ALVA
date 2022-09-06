@@ -1,5 +1,0 @@
-firstname:diomede
-lastname:fatigati
-birthyear:
-birthmonth:
-birthday:
