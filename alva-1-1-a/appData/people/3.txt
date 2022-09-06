@@ -1,0 +1,10 @@
+firstname:daniela
+lastname:fatigati
+birthyear:1968
+birthmonth:may
+birthday:17
+relation:mother
+sports:used to do artistic gymnastics
+music:used to play the piano. likes the beatles a lot, knows a lot of italian singers from the last century. likes opera and classical music in smaller amounts.
+behavior:no comment
+notes:need to discuss 21st and 24th of july.

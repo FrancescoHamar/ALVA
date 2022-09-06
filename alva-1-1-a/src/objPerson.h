@@ -34,7 +34,7 @@ public:
 		: firstName(""), lastName(""), birthYear(""), birthMonth(""), 
 		birthDay(""), relation(""), sports(""), music(""), behavior(""), 
 		notes(""), m_line(""), m_lastLine(""), m_fullFile(""), m_personCode(""), 
-		m_peopleURL("../frontalcortex/people/"), m_masterURL("../frontalcortex/people/master.txt")
+		m_peopleURL("../appData/people/"), m_masterURL("../appData/people/master.txt")
 	{
 	}
 

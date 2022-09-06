@@ -30,7 +30,7 @@ public:
 
 	Self()
 		: serialtag(""), firstName(""), lastName(""), m_series(""), m_version(""), m_status(""), m_born(false), m_alvaBirthday(""), m_assigned(false), 
-		m_birthYear(""), m_birthMonth(""), m_birthDate(""), m_tagURL("../deephippo/tag.txt"), m_keeperURL("../deephippo/keeper.txt")
+		m_birthYear(""), m_birthMonth(""), m_birthDate(""), m_tagURL("../bios/tag.txt"), m_keeperURL("../bios/keeper.txt")
 	{
 		initializeAlva();
 		initializeKeeper();

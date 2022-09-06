@@ -1,0 +1,10 @@
+firstname:lorenzo
+lastname:hamar
+birthyear:2007
+birthmonth:april
+birthday:27
+relation:brother
+sports:plays soccer, watches f1 and of course soccer
+music:queens, lots of youtube-pushed songs, etc.
+behavior:no comment
+notes:no notes

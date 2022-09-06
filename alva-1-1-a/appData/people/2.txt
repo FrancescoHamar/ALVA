@@ -1,0 +1,10 @@
+firstname:roberto
+lastname:hamar
+birthyear:2001
+birthmonth:april
+birthday:27
+relation:brother
+sports:likes endurance sports. used to swim, play soccer, triathlon, pentathlon.
+music:not enough info
+behavior:no comment
+notes:no relevant info

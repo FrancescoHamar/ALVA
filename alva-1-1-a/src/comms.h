@@ -1,7 +1,7 @@
 #pragma once
 
-const std:: string commsURL = "../frontalcortex/comms/dir.txt";
-const std::string resURL = "../frontalcortex/comms/res.txt";
+const std:: string commsURL = "../appData/comms/dir.txt";
+const std::string resURL = "../appData/comms/res.txt";
 
 void initNET();
 void sendRequest(int indicator, std::string param);
