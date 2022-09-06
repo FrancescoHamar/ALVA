@@ -1,11 +1,13 @@
 #include <iostream>
+#include <algorithm>
+#include <ctime>
 #include "util.h"
 
 std::string listen()
 {
 	std::string input = "";
 	getline( std::cin, input, '\n' );
-	transform(input.begin(), input.end(), input.begin(), ::tolower);
+	std::transform(input.begin(), input.end(), input.begin(), ::tolower);
 	return input;
 }
 
@@ -22,11 +24,11 @@ std::string parseDataPrev(std::string givenLine)
 }
 
 const std::string currentDateTime() {  // Not my code!!
-    time_t now = time(0);
+    time_t now = std::time(0);
     struct tm tstruct;
     char buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    tstruct = *std::localtime(&now);
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
 
     return buf;
 }
