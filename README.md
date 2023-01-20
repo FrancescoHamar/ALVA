@@ -6,7 +6,7 @@ This project was made with the purpose of learning c++. The name is an acronym f
 ## Some details:
 The program runs in a terminal. It is set up to know your name and recognizes a list of commands.
 - Some Features:
-  - If connected to internet, it can tell the weather of any city via a weather API
+  - If connected to internet, it can tell the weather of any city via a weather API. This communication occours through a python script, the C++ part is therefore put in communication through a file read/write system.
   - It has a to-do list function where you can keep track of tasks from frugal ones to urgent
   - It can be given information about people or events you've been to and this can be viewed later on. The point of this feature was mainly to work with a simple file system in c++.
   - (Not yet implemented) Calendar that will display events, birthdays, dates to remember, etc.
